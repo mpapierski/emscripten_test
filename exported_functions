@@ -1,0 +1,9 @@
+[
+    "_new_foo",
+    "_free_foo",
+    "_foo_new_callbacks",
+    "_foo_free_callbacks",
+    "_foo_set_callbacks",
+    "_foo_add",
+    "_foo_get_internal_value"
+]

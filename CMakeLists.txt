@@ -1,0 +1,29 @@
+cmake_minimum_required (VERSION 2.6)
+project (vterm C)
+
+include_directories (${CMAKE_CURRENT_SOURCE_DIR})
+
+if (EMSCRIPTEN)
+	set(CMAKE_STATIC_LIBRARY_SUFFIX ".bc" CACHE STRING "" FORCE)
+	set(CMAKE_SHARED_LIBRARY_SUFFIX ".bc" CACHE STRING "" FORCE)
+	set(CMAKE_FIND_LIBRARY_SUFFIXES ".bc" CACHE STRING "" FORCE)
+	set(CMAKE_C_CREATE_STATIC_LIBRARY "<CMAKE_C_COMPILER> -o <TARGET> <LINK_FLAGS> <OBJECTS>" CACHE STRING "" FORCE)
+	set(CMAKE_CXX_CREATE_STATIC_LIBRARY "<CMAKE_CXX_COMPILER> -o <TARGET> <LINK_FLAGS> <OBJECTS>" CACHE STRING "" FORCE)
+endif()
+
+set (SOURCES
+	test.c
+	test.h
+	)
+
+add_library (foo
+	${SOURCES}
+	)
+
+add_custom_target (js
+	COMMAND emcc $<TARGET_FILE:foo>
+		-o foo.js
+		-s EXPORTED_FUNCTIONS="@${CMAKE_CURRENT_SOURCE_DIR}/exported_functions"
+		-s RESERVED_FUNCTION_POINTERS=20
+	)
+
