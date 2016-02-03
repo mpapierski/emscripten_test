@@ -1,4 +1,4 @@
-I'm playing around with `emscripten`. This is a dummy library which provides some kind of functionality. 
+I'm playing around with `emscripten`. This is a dummy library which provides some kind of functionality I want abuse from JS. 
 
 - Implementing OS functionality in JavaScript
 - Calling C functions from JavaScript
